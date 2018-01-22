@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root> 
+
+</root>
+
+
+Test 1000000 elements
+
+addAttrribute
+for each:
+178695193ns
+174656240ns
+177457397ns
+177341623ns
+174178363ns
+179901790ns
+
+while removefirst:
+176016790ns
+178627043ns
+174398417ns
+179974866ns
+177956210ns
+178377021ns

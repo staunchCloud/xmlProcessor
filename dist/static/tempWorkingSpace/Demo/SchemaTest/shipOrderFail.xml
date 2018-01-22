@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+
+<shipOrder orderID="889923"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!--xsi:noNamespaceSchemaLocation="shipOrder.xsd"-->
+	<orderPerson>George Bush</orderPerson>
+	<shipTo> <!--can have attribute or not since it does not use 'use="required"'-->
+		<name>John Adams</name>
+		<address>Oxford Street</address>
+		<city>London</city>
+		<country>UK</country>
+		additional information
+	</shipTo>
+	<item>
+		<price>10312.00</price>
+		<title>Empire Burlesque</title>
+		<note>Special Edition</note>
+		<quantity>1</quantity>
+
+	</item>
+	<item>
+		<title>Hide your heart</title>
+		<quantity>1</quantity>
+		<price>9.0000000000000000</price>
+	</item>
+
+</shipOrder>

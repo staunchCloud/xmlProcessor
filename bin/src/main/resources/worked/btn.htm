@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="test/html charset=utf-8">
+    <title>XML-Processor</title>
+    <script type="text/javascript" src="zbus.js"></script>  
+</head> 
+
+<body>
+	<script type="text/javascript">
+	var b = new ClientBootstrap();  
+	b.serviceAddress("localhost:80");
+	function upload(){ 
+		var rpc = b.invoker(); 
+		rpc.module = "handler";
+		var fileName = "test" + new Date().getUTCMilliseconds();
+		var content = "Filecontent";  
+		
+		rpc.writeFile(fileName, content).then(function(msg){
+			console.log(msg);
+		});
+	}
+	
+	function test(){ 
+		var rpc = b.invoker(); 
+		rpc.module = "handler";  
+		rpc.listFiles().then(function(files){
+			for(var file in files){
+				console.log(files[file]);
+			}
+		});
+	}
+	
+	</script>
+    <button onclick="test()">
+        Upload
+    </button>
+
+</body>
+
+</html>

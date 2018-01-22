@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root ID="10"> 
+  <book ID="1"> 
+    <name>Java编程思想</name>  
+    <author>布鲁斯·埃克尔</author>  
+    <year>2001</year>  
+    <price>89</price> 
+  </book>  
+  <book ID="2"> 
+    <name>ISO 20022标准</name>  
+    <author>李东荣</author>  
+    <year>2012</year>  
+    <price>45</price> 
+  </book>  
+  <book ID="3"> 
+    <name>金融市场基础知识</name>  
+    <author>金融市场编委会</author>  
+    <year>2017</year>  
+    <price>0.98</price> 
+  </book>  
+  <newEle>00978</newEle>  
+  <newEle>00978</newEle>  
+  <newEle>00978</newEle>  
+  <newEle>00978</newEle>  
+  <newEle>00978</newEle>  
+  <newEle>00978</newEle>  
+  <newEle>00978</newEle> 
+</root>

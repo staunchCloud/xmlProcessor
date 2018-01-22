@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root> 
+  <info>本文件用于展示XML-PEOCESSOR的批处理能力</info>  
+  <info>批处理适用于结构相似的文件，可有效节约时间</info>  
+  <firstLevel>第一层 
+    <secondLevel>第二层 
+      <thirdLevel>第三层</thirdLevel> 
+    </secondLevel> 
+  </firstLevel>  
+  <firstLevel>第一层 
+    <secondLevel>第二层 
+      <thirdLevel>第三层</thirdLevel> 
+    </secondLevel> 
+  </firstLevel>  
+  <firstLevel>第一层 
+    <secondLevel>第二层 
+      <thirdLevel>第三层</thirdLevel> 
+    </secondLevel> 
+  </firstLevel> 
+</root>

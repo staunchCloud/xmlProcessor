@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="test/html charset=utf-8">
+    <title>XML-Processor</title>
+    <link rel="shortcut icon" href="XmlProcessor.png" />
+    <script type="text/javascript" src="XmlProcessor.js"></script>
+    <script type="text/css" src="XmlProcessor.css"></script>
+
+</head>
+
+<style>
+    body {
+        width:100%;
+        background-color: black;
+    }
+</style>
+
+<body>
+    <!--文件列表框开始-->
+    <style>
+        div#fileFrame {
+            width: 20%;
+            float: left;
+        }
+    </style>
+    <div id="fileFrame">
+        <!--文件名搜索框-->
+        <style>
+            input#searchFile {
+                width: 100%;
+                height: 44px;
+                background-color: #333;
+                color: white;
+                font-size: 16px;
+                padding-left: 10px;
+                border: 1px groove white;
+                border-radius: 15px 0px 0px 0px;
+                outline: none;
+            }
+        </style>
+        
+        <!--js.fileFilter()根据输入在文件列表内筛选-->
+        <input type="text" placeholder="Search file..." id="searchFile" onkeyup="fileFilter()">
+
+        <!--文件列表-->
+        <style>
+            div#fileList {
+                width: 100%;
+                height: 700px;
+                background-color: #333;
+                font-size: 15px;
+                border: 1px groove white;
+                border-radius: 0px 0px 0px 15px;
+                overflow-y: auto;
+                /*resize:horizontal;*/
+            }
+
+            ::-webkit-scrollbar {
+                width: 10px;
+            }
+        
+            ::-webkit-scrollbar-track {
+                margin-bottom: 3px;
+                margin-top:3px;
+                border-radius: 10px;
+                background-color: black;
+                box-shadow: 0 0 5px white;
+                -webkit-box-shadow: inset 0 0 5px white;
+            }
+        
+            ::-webkit-scrollbar-thumb {
+                margin-bottom: 3px;
+                margin-top:3px;
+                border-radius: 10px;
+                box-shadow: 0 0 5px black;
+                -webkit-box-shadow: inset 0 0 5px black;
+                background-color: white;
+            }
+
+            div#fileList a {
+                color: white;
+                background-color: #333;
+                padding: 10px;
+                text-decoration: none;
+                display: block;
+            }
+
+            #fileList a:hover {
+                background-color: red;
+            }
+
+            #fileList a.active {
+                color: white;
+                background-color: red;
+            }
+        </style>
+
+        <!--js.selectFile(id)点击改变颜色并加上或去除前缀~符号-->
+        <div id="fileList">
+            <a id="1" onclick="selectFile('1')">test01.xml</a>
+            <a id="2" onclick="selectFile('2')">test02.xml</a>
+            <a id="3" onclick="selectFile('3')">test03.xml</a>
+            <a id="4" onclick="selectFile('4')">test04.xml</a>
+            <a id="5" onclick="selectFile('5')">simple.xml</a>
+        </div>
+
+    </div>
+    <!--文件列表框结束-->
+
+
+    <!--文件处理框开始-->
+    <style>
+        div.handleFrame {
+            width: 80%;
+            float: left;
+        }
+    </style>
+    <div class="handleFrame">
+        <div class="handleFrame">
+            <!--任务导航-->
+            <style>
+                ul#functionList {
+                    border: 1px groove white;
+                    border-radius: 0px 15px 0px 0px;
+                    width: 100%;
+
+                    list-style-type: none;
+                    margin: 0;
+                    padding: 0;
+                    overflow: hidden;
+                    background-color: #333;
+                }
+
+                li.dropdown {
+                    float: left;
+                }
+
+                li button,
+                .dropbtn {
+                    display: inline-block;
+                    color: white;
+                    text-align: center;
+                    padding: 14px 16px;
+                    text-decoration: none;
+                }
+
+                li button:hover,
+                .dropdown:hover .dropbtn {
+                    background-color: red;
+                }
+
+                li.dropdown {
+                    display: inline-block;
+                }
+
+                .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    background-color: white;
+                    /*这个白色应当被覆盖掉*/
+                    min-width: 100px;
+                }
+
+                .dropdown-content button {
+                    font-size: 12px;
+                    border: 0;
+                    background-color: #333;
+                    width: 135px;
+                    Height: 50px;
+                    text-decoration: none;
+                    display: block;
+                    text-align: left;
+                    outline: none;
+                }
+
+                /*悬浮子类按钮*/
+
+                .dropdown-content button:hover {
+                    background-color: red;
+                }
+
+                .dropdown:hover .dropdown-content {
+                    display: block;
+                }
+            </style>
+            <!--js.switchOper()切换操作页面-->
+            <ul id="functionList">
+                <!--文件功能-->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Files</a>
+                    <div class="dropdown-content">
+                        <button>Open File</button>
+                        <button>Open Directory</button>
+                        <button>Save File</button>
+                        <button>Save All Files</button>
+                    </div>
+                </li>
+                <!--查找功能-->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Retrieve</a>
+                    <div class="dropdown-content">
+                        <button class="operBtn" onclick="switchOper(event, 'retrieveElementNum')">Element Number</button>
+                        <button class="operBtn" onclick="switchOper(event, 'retrieveAttributeNum')">Attribute Number</button>
+                        <button class="operBtn" onclick="switchOper(event, 'retrieveElementInfo')">Element Info</button>
+                    </div>
+                </li>
+                <!--添加功能-->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Add</a>
+                    <div class="dropdown-content">
+                        <button class="operBtn" onclick="switchOper(event, 'addElement')">Add Element</button>
+                        <button class="operBtn" onclick="switchOper(event, 'addAttribute')">Add Attribute</button>
+                        <button class="operBtn" onclick="switchOper(event, 'addComment')">Add Comment</button>
+                    </div>
+                </li>
+                <!--更新功能-->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Update</a>
+                    <div class="dropdown-content">
+                        <button class="operBtn" onclick="switchOper(event, 'updateElement')">Update Element</button>
+                        <button class="operBtn" onclick="switchOper(event, 'updateAttribute')">Update Attribute</button>
+                    </div>
+                </li>
+                <!--删除功能-->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Delete</a>
+                    <div class="dropdown-content">
+                        <button class="operBtn" onclick="switchOper(event, 'deleteElement')">Delete Element</button>
+                        <button class="operBtn" onclick="switchOper(event, 'deleteAttribute')">Delete Attribute</button>
+                        <button class="operBtn" onclick="switchOper(event, 'deleteComment')">Delete Comment</button>
+                    </div>
+                </li>
+                <!--其他功能-->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Other</a>
+                    <div class="dropdown-content">
+                        <button class="operBtn" onclick="switchOper(event, 'addIDs')">Add IDs</button>
+                        <button class="operBtn" onclick="switchOper(event, 'welcome')">Welcome Page</button>
+                    </div>
+                </li>
+            </ul>
+
+
+            <!--中部操控-->
+            <div class="handleFrame">
+                <!--XPath面板-->
+                <style>
+                    div.xPathPanel {
+                        width: 30%;
+                        height: 180px;
+                        border: 1px groove white;
+                        background-color: #333;
+                        border-style: ridge;
+                    }
+
+                    input#inputXPath {
+                        height: 30px;
+                        width: 200px;
+                        border: 2px solid #ccc;
+                        border-radius: 5px;
+                        font-size: 16px;
+                        background-color: #333;
+                        color: white;
+                    }
+
+                    form#xPathInput {
+                        color: white;
+                        margin-left: 10px;
+                        margin-top: 10px;
+                    }
+
+                    div.xPathPanel p {
+                        text-align: left;
+                        color: white;
+                    }
+
+                    button#changeXPath {
+                        font-size: 16px;
+                        background-color: #333;
+                        color: white;
+                        margin-left: 90px;
+                        margin-top: 20px;
+                        outline: none;
+                        border-radius: 10px;
+                    }
+
+                    button#changeXPath:hover {
+                        background-color: red;
+                    }
+
+                    button#changeXPath:active {
+                        background-color: red;
+                    }
+
+                    p#currentXPath{
+                        word-break: break-all;
+                        margin-left: 10px;
+                        margin-right: 10px;
+                    }
+                </style>
+
+                <!--js.updateCurrentXPath()根据输入改变当前的XPath-->
+                <div class="xPathPanel">
+                    <form id="xPathInput" action="">XPath:
+                        <input id="inputXPath" type="text" name="xPath">
+                    </form>
+                    <button id="changeXPath" onclick="updateCurrentXPath()">Change XPath</button>
+                    <p class="noticeText">Current XPath: </p>
+                    <p id="currentXPath" title=""></p>
+                </div>
+
+                <!--以下是具体的操作页面-->
+                <style>
+                    div.operDiv {
+                        float: left;
+                        width: 30%;
+                        height: 518px;
+                        border: 1px groove white;
+                        color: white;
+                        background-color: #333;
+                        display: none;
+                    }
+
+                    div.welcomeDiv{
+                        float: left;
+                        width: 300px;
+                        height: 518px;
+                        border: 1px groove white;
+                        color: white;
+                        background-color: #333;
+                    }
+
+                    .argsInput {
+                        background-color: #333;
+                        border-radius: 5px;
+                        border: 1px groove white;
+                        color: white;
+                        font-size: 15px;
+                        padding: 5px 5px 5px 5px;
+                        margin-left: 10px;
+                    }
+
+                    .exeOper {
+                        margin: 20px 5px 5px 10px;
+                        background-color: #333;
+                        color: white;
+                        outline: none;
+
+                        font-size: 16px;
+                        border-radius: 10px;
+                    }
+
+                    .exeOper:hover {
+                        background-color: red;
+                    }
+
+                    .noticeText {
+                        margin-left: 10px;
+                    }
+                </style>
+
+                <!--Retrieve操作页面-->
+                <div id="retrieveElementNum" class="operDiv">
+                    <p class="noticeText">Element Name:</p>
+                    <input type="text" placeholder="Name Regex..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <div id="retrieveAttributeNum" class="operDiv">
+                    <p class="noticeText">Attribute Name:</p>
+                    <input type="text" placeholder="Name Regex..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <div id="retrieveElementInfo" class="operDiv">
+                    <p class="noticeText">Check information of elements selected by XPath:</p>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <!--Add操作页面-->
+                <div id="addElement" class="operDiv">
+                    <p class="noticeText">New Element Name:</p>
+                    <input type="text" placeholder="New Name..." class="argsInput">
+                    <p class="noticeText">New Element Value:</p>
+                    <input type="text" placeholder="New Value..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <div id="addAttribute" class="operDiv">
+                    <p class="noticeText">New Attribute Name:</p>
+                    <input type="text" placeholder="New Name..." class="argsInput">
+                    <p class="noticeText">New Attribute Value:</p>
+                    <input type="text" placeholder="New Value..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <div id="addComment" class="operDiv">
+                    <p class="noticeText">New Comment Value:</p>
+                    <input type="text" placeholder="New Value..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <!--Update操作页面-->
+                <div id="updateElement" class="operDiv">
+                    <p class="noticeText">New Element Value:</p>
+                    <input type="text" placeholder="Update Value..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+                <div id="updateAttribute" class="operDiv">
+                    <p class="noticeText">New Attribute Value:</p>
+                    <input type="text" placeholder="Update Value..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <!--Delete操作页面-->
+                <div id="deleteElement" class="operDiv">
+                    <p class="noticeText">Delete elements selected by XPath:</p>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <div id="deleteAttribute" class="operDiv">
+                    <p class="noticeText">Delete attributes selected by XPath:</p>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <div id="deleteComment" class="operDiv">
+                    <p class="noticeText">Delete commments in elements that selected by XPath:</p>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <!--Other操作页面-->
+                <div id="addIDs" class="operDiv">
+                    <p class="noticeText">Start from:</p>
+                    <input type="text" placeholder="First ID value..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <!--默认页面-->
+                <div id="welcome" class="welcomeDiv">
+                    <p>Welcome to XmlProcessor!</p>
+                </div>
+
+            </div>
+            <!--中部操控结束-->
+
+
+
+            <!--XML文件内容显示面板-->
+            <style>
+                div.fileContent {
+                    float: left;
+                    width: 70%;
+                    height: 700px;
+                    border: 1px groove white;
+                    background-color: #333;
+                    border-radius: 0px 0px 15px 0px;
+                }
+            </style>
+
+            <div class="fileContent">
+
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<order>
+	<orderType>虚拟交易</orderType>
+	<from>C公司</from>
+	<to>D公司</to>
+	<shipDate>2017-12-20</shipDate>
+
+	<orderDetail>
+		<item>
+			<name>吃鸡外挂</name>
+			<quantity>3</quantity>
+			<unit>个</unit>
+			<singlePrice>15</singlePrice>
+			<totalPrice>45</totalPrice>
+			<extendedInfo>
+				<notice>仅供娱乐，会被封号</notice>
+			</extendedInfo>
+		</item>
+
+		<item>
+			<name>地图文件</name>
+			<quantity>1000</quantity>
+			<unit>个</unit>
+			<singlePrice>0.1</singlePrice>
+			<totalPrice>100</totalPrice>
+		</item>
+
+		<item>
+			<name>演员队友</name>
+			<quantity>22</quantity>
+			<unit>位</unit>
+			<singlePrice>10</singlePrice>
+			<totalPrice>200</totalPrice>
+		</item>
+	</orderDetail>
+</order>

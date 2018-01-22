@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<order> 
+	<orderType>Tea Trade</orderType>  
+	<from>Company A</from>  
+	<to>Company B</to>  
+	<shipDate>2017-12-20</shipDate>  
+	<orderDetail> 
+		<item> 
+			<name>TWININGS Black Tea</name>  
+			<quantity>100</quantity>  
+			<unit>Box</unit>  
+			<singlePrice>25</singlePrice>  
+			<totalPrice>2500</totalPrice> 
+		</item>  
+		<item> 
+			<name>COSTA Cup</name>  
+			<quantity>1000</quantity>  
+			<unit>cup</unit>  
+			<singlePrice>1</singlePrice>  
+			<totalPrice>1000</totalPrice> 
+		</item>
+	</orderDetail>
+</order>

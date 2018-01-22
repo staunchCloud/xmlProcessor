@@ -1,0 +1,88 @@
+/*XmlProcessor CSS*/
+
+
+/*body*/
+body {
+    background-color: rgb(36, 36, 36);
+}
+
+
+/*scrollbar*/
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    background-color: black;
+    box-shadow: 0 0 5px white;
+    -webkit-box-shadow: inset 0 0 5px white;
+}
+
+::-webkit-scrollbar-thumb {
+    margin-bottom: 3px;
+    margin-top: 3px;
+    border-radius: 10px;
+    box-shadow: 0 0 5px black;
+    -webkit-box-shadow: inset 0 0 5px black;
+    background-color: white;
+}
+
+
+/*fileFrame, it contains "searchInput" and "fileList"*/
+div#fileFrame {
+    width: 20%;
+    float: left;
+    resize:horizontal;
+}
+
+/*searchInput*/
+input#searchFile {
+    width:100%;
+    height:30px;
+    background-color: #333;
+    color: white;
+    font-size: 16px;
+    /*padding-left: 10px;*/
+    border: 2px groove white;
+    outline: none;
+}
+
+
+/*fileList*/
+div#fileList {
+    width: 100%;
+    background-color: #333;
+    font-size: 15px;
+    border: 2px groove white;
+    overflow-y: auto; 
+    resize:horizontal;
+}
+
+div#fileList a {
+    color: white;
+    background-color: #333;
+    padding: 10px;
+    text-decoration: none;
+    display: block;
+}
+
+#fileList a:hover {
+    background-color: red;
+}
+
+#fileList a.active {
+    color: white;
+    background-color: red;
+}
+
+li{
+    color:olivedrab;
+    background-color: #333;
+    font-size: 15px;
+}
+
+
+

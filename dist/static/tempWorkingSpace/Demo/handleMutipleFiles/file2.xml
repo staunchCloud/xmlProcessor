@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<root ID="10"> 
+	<info>This file is used to demo XML-PEOCESSOR can handle multiple files at the same time</info> 
+	<firstLevel>level 1
+		<secondLevel>level 2
+			<thirdLevel>level 3</thirdLevel> 
+		</secondLevel> 
+	</firstLevel>  
+	<firstLevel>level 1
+		<secondLevel>level 2
+			<thirdLevel>level 3</thirdLevel> 
+		</secondLevel> 
+	</firstLevel>  
+	<firstLevel>level 1
+		<secondLevel>level 2
+			<thirdLevel>level 3</thirdLevel> 
+		</secondLevel> 
+	</firstLevel>  
+</root>

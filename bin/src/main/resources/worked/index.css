@@ -1,0 +1,245 @@
+body { 
+	background-color: black;
+}
+
+div#main{
+	width: 100%;
+}
+div#fileFrame {
+	width: 202px;
+	float: left;
+}
+
+input#searchFile {
+	width: 190px;
+	height: 44px;
+	background-color: #333;
+	color: white;
+	font-size: 16px;
+	padding-left: 10px;
+	border: 1px groove white;
+	border-radius: 15px 0px 0px 0px;
+	outline: none;
+}
+
+div#fileList {
+	width: 200px;
+	height: 700px;
+	background-color: #333;
+	font-size: 15px;
+	border: 1px groove white;
+	border-radius: 0px 0px 0px 15px;
+	overflow-y: auto;
+	/*resize:horizontal;*/
+}
+
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+::-webkit-scrollbar-track {
+	margin-bottom: 3px;
+	margin-top: 3px;
+	border-radius: 10px;
+	background-color: black;
+	box-shadow: 0 0 5px white;
+	-webkit-box-shadow: inset 0 0 5px white;
+}
+
+::-webkit-scrollbar-thumb {
+	margin-bottom: 3px;
+	margin-top: 3px;
+	border-radius: 10px;
+	box-shadow: 0 0 5px black;
+	-webkit-box-shadow: inset 0 0 5px black;
+	background-color: white;
+}
+
+div#fileList a {
+	color: white;
+	background-color: #333;
+	padding: 10px;
+	text-decoration: none;
+	display: block;
+}
+
+#fileList a:hover {
+	background-color: red;
+}
+
+#fileList a.active {
+	color: white;
+	background-color: red;
+}
+
+div.handleFrame {
+	float: left;
+}
+
+ul#functionList {
+	border: 1px groove white;
+	border-radius: 0px 15px 0px 0px;
+	width: 700;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+}
+
+li.dropdown {
+	float: left;
+}
+
+li button, .dropbtn {
+	display: inline-block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+li button:hover, .dropdown:hover .dropbtn {
+	background-color: red;
+}
+
+li.dropdown {
+	display: inline-block;
+}
+
+.dropdown-content {
+	display: none;
+	position: absolute;
+	background-color: white;
+	/*这个白色应当被覆盖掉*/
+	min-width: 100px;
+}
+
+.dropdown-content button {
+	font-size: 12px;
+	border: 0;
+	background-color: #333;
+	width: 135px;
+	Height: 50px;
+	text-decoration: none;
+	display: block;
+	text-align: left;
+	outline: none;
+}
+
+/*悬浮子类按钮*/
+.dropdown-content button:hover {
+	background-color: red;
+}
+
+.dropdown:hover .dropdown-content {
+	display: block;
+}
+
+div.xPathPanel {
+	width: 300px;
+	height: 180px;
+	border: 1px groove white;
+	background-color: #333;
+	border-style: ridge;
+}
+
+input#inputXPath {
+	height: 30px;
+	width: 200px;
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	font-size: 16px;
+	background-color: #333;
+	color: white;
+}
+
+form#xPathInput {
+	color: white;
+	margin-left: 10px;
+	margin-top: 10px;
+}
+
+div.xPathPanel p {
+	text-align: left;
+	color: white;
+}
+
+button#changeXPath {
+	font-size: 16px;
+	background-color: #333;
+	color: white;
+	margin-left: 90px;
+	margin-top: 20px;
+	outline: none;
+	border-radius: 10px;
+}
+
+button#changeXPath:hover {
+	background-color: red;
+}
+
+button#changeXPath:active {
+	background-color: red;
+}
+
+p#currentXPath {
+	word-break: break-all;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+div.operDiv {
+	float: left;
+	width: 300px;
+	height: 518px;
+	border: 1px groove white;
+	color: white;
+	background-color: #333;
+	display: none;
+}
+
+div.welcomeDiv {
+	float: left;
+	width: 300px;
+	height: 518px;
+	border: 1px groove white;
+	color: white;
+	background-color: #333;
+}
+
+.argsInput {
+	background-color: #333;
+	border-radius: 5px;
+	border: 1px groove white;
+	color: white;
+	font-size: 15px;
+	padding: 5px 5px 5px 5px;
+	margin-left: 10px;
+}
+
+.exeOper {
+	margin: 20px 5px 5px 10px;
+	background-color: #333;
+	color: white;
+	outline: none;
+	font-size: 16px;
+	border-radius: 10px;
+}
+
+.exeOper:hover {
+	background-color: red;
+}
+
+.noticeText {
+	margin-left: 10px;
+}
+
+div.fileContent {
+	float: left;
+	width: 490px;
+	height: 700px;
+	border: 1px groove white;
+	background-color: #333;
+	border-radius: 0px 0px 15px 0px;
+}

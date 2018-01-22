@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<order>
+	<orderType>Space Trade</orderType>
+	<from>Company A</from>
+	<to>Company E</to>
+	<shipDate>2017-12-18</shipDate>
+	<orderDetail>
+		<item>
+			<name>Space Detector</name>
+			<quantity>8</quantity>
+			<unit>ship</unit>
+			<singlePrice>100000</singlePrice>
+			<totalPrice>800000</totalPrice>
+			<extendedInfo>
+				<weakness>Easy to break without maintains</weakness>
+			</extendedInfo>
+		</item>
+		<item>
+			<name>Collection ship</name>
+			<quantity>1</quantity>
+			<unit>ship</unit>
+			<singlePrice>1177980</singlePrice>
+			<totalPrice>1177980</totalPrice>
+		</item>
+	</orderDetail>
+</order>

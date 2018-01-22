@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="test/html charset=utf-8">
+    <title>XML-Processor</title>
+    <link rel="stylesheet" href="index.css" type="text/css"> 
+    
+    <script type="text/javascript" src="jquery.js"></script> 
+    <script type="text/javascript" src="bootstrap.min.js"></script> 
+    <script type="text/javascript" src="index.js"></script> 
+    <script type="text/javascript" src="XmlProcessor.js"></script>
+    <script type="text/javascript" src="zbus.js"></script> 
+    
+    <link rel="shortcut icon" href="XmlProcessor.png" />
+</head> 
+
+<body>
+<div id="main">
+    <!--文件列表框开始--> 
+    <div id="fileFrame">
+        <!--文件名搜索框-->  
+        <!--js.fileFilter()根据输入在文件列表内筛选-->
+        <input type="text" placeholder="Search file..." id="searchFile" onkeyup="fileFilter()">
+		
+        <!--文件列表-->  
+        <!--js.selectFile(id)点击改变颜色并加上或去除前缀~符号-->
+        <div id="fileList"> 
+        </div>
+
+    </div>
+    <!--文件列表框结束-->
+
+
+    <!--文件处理框开始--> 
+    <div class="handleFrame">
+        <div class="handleFrame">
+            <!--任务导航--> 
+            <!--js.switchOper()切换操作页面-->
+            <ul id="functionList">
+                <!--文件功能-->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Files</a>
+                    <div class="dropdown-content">
+                        <button>Open File</button>
+                        <button>Open Directory</button>
+                        <button>Save File</button>
+                        <button>Save All Files</button>
+                    </div>
+                </li>
+                <!--查找功能-->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Retrieve</a>
+                    <div class="dropdown-content">
+                        <button class="operBtn" onclick="switchOper(event, 'retrieveElementNum')">Element Number</button>
+                        <button class="operBtn" onclick="switchOper(event, 'retrieveAttributeNum')">Attribute Number</button>
+                        <button class="operBtn" onclick="switchOper(event, 'retrieveElementInfo')">Element Info</button>
+                    </div>
+                </li>
+                <!--添加功能-->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Add</a>
+                    <div class="dropdown-content">
+                        <button class="operBtn" onclick="switchOper(event, 'addElement')">Add Element</button>
+                        <button class="operBtn" onclick="switchOper(event, 'addAttribute')">Add Attribute</button>
+                        <button class="operBtn" onclick="switchOper(event, 'addComment')">Add Comment</button>
+                    </div>
+                </li>
+                <!--更新功能-->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Update</a>
+                    <div class="dropdown-content">
+                        <button class="operBtn" onclick="switchOper(event, 'updateElement')">Update Element</button>
+                        <button class="operBtn" onclick="switchOper(event, 'updateAttribute')">Update Attribute</button>
+                    </div>
+                </li>
+                <!--删除功能-->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Delete</a>
+                    <div class="dropdown-content">
+                        <button class="operBtn" onclick="switchOper(event, 'deleteElement')">Delete Element</button>
+                        <button class="operBtn" onclick="switchOper(event, 'deleteAttribute')">Delete Attribute</button>
+                        <button class="operBtn" onclick="switchOper(event, 'deleteComment')">Delete Comment</button>
+                    </div>
+                </li>
+                <!--其他功能-->
+                <li class="dropdown">
+                    <a href="#" class="dropbtn">Other</a>
+                    <div class="dropdown-content">
+                        <button class="operBtn" onclick="switchOper(event, 'addIDs')">Add IDs</button>
+                        <button class="operBtn" onclick="switchOper(event, 'welcome')">Welcome Page</button>
+                    </div>
+                </li>
+            </ul>
+
+
+            <!--中部操控-->
+            <div class="handleFrame">
+                <!--XPath面板--> 
+                <!--js.updateCurrentXPath()根据输入改变当前的XPath-->
+                <div class="xPathPanel">
+                    <form id="xPathInput" action="">XPath:
+                        <input id="inputXPath" type="text" name="xPath">
+                    </form>
+                    <button id="changeXPath" onclick="updateCurrentXPath()">Change XPath</button>
+                    <p class="noticeText">Current XPath: </p>
+                    <p id="currentXPath" title=""></p>
+                </div>
+
+                <!--以下是具体的操作页面--> 
+
+                <!--Retrieve操作页面-->
+                <div id="retrieveElementNum" class="operDiv">
+                    <p class="noticeText">Element Name:</p>
+                    <input type="text" placeholder="Name Regex..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <div id="retrieveAttributeNum" class="operDiv">
+                    <p class="noticeText">Attribute Name:</p>
+                    <input type="text" placeholder="Name Regex..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <div id="retrieveElementInfo" class="operDiv">
+                    <p class="noticeText">Check information of elements selected by XPath:</p>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <!--Add操作页面-->
+                <div id="addElement" class="operDiv">
+                    <p class="noticeText">New Element Name:</p>
+                    <input type="text" placeholder="New Name..." class="argsInput">
+                    <p class="noticeText">New Element Value:</p>
+                    <input type="text" placeholder="New Value..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <div id="addAttribute" class="operDiv">
+                    <p class="noticeText">New Attribute Name:</p>
+                    <input type="text" placeholder="New Name..." class="argsInput">
+                    <p class="noticeText">New Attribute Value:</p>
+                    <input type="text" placeholder="New Value..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <div id="addComment" class="operDiv">
+                    <p class="noticeText">New Comment Value:</p>
+                    <input type="text" placeholder="New Value..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <!--Update操作页面-->
+                <div id="updateElement" class="operDiv">
+                    <p class="noticeText">New Element Value:</p>
+                    <input type="text" placeholder="Update Value..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+                <div id="updateAttribute" class="operDiv">
+                    <p class="noticeText">New Attribute Value:</p>
+                    <input type="text" placeholder="Update Value..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <!--Delete操作页面-->
+                <div id="deleteElement" class="operDiv">
+                    <p class="noticeText">Delete elements selected by XPath:</p>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <div id="deleteAttribute" class="operDiv">
+                    <p class="noticeText">Delete attributes selected by XPath:</p>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <div id="deleteComment" class="operDiv">
+                    <p class="noticeText">Delete commments in elements that selected by XPath:</p>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <!--Other操作页面-->
+                <div id="addIDs" class="operDiv">
+                    <p class="noticeText">Start from:</p>
+                    <input type="text" placeholder="First ID value..." class="argsInput">
+                    <br/>
+                    <button class="exeOper">Confirm</button>
+                </div>
+
+                <!--默认页面-->
+                <div id="welcome" class="welcomeDiv">
+                    <p>Welcome to XmlProcessor!</p>
+                </div>
+
+            </div>
+            <!--中部操控结束-->
+
+
+
+            <!--XML文件内容显示面板--> 
+            <div class="fileContent">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+</html>

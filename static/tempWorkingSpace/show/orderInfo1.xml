@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<order>
+	<orderType>现货交易</orderType>
+	<from>A公司</from>
+	<to>B公司</to>
+	<shipDate>2017-12-20</shipDate>
+
+	<orderDetail>
+		<item>
+			<name>TWININGS红茶</name>
+			<quantity>100</quantity>
+			<unit>盒</unit>
+			<singlePrice>25</singlePrice>
+			<totalPrice>2500</totalPrice>
+		</item>
+
+		<item>
+			<name>COSTA纸杯</name>
+			<quantity>1000</quantity>
+			<unit>个</unit>
+			<singlePrice>1</singlePrice>
+			<totalPrice>1000</totalPrice>
+		</item>
+
+		<item>
+			<name>JAVA编程思想第2版</name>
+			<quantity>10</quantity>
+			<unit>本</unit>
+			<singlePrice>69</singlePrice>
+			<totalPrice>690</totalPrice>
+			<extendedInfo>
+				<author>Bruce Eckel</author>
+				<translator>侯捷</translator>
+			</extendedInfo>
+		</item>
+	</orderDetail>
+</order>

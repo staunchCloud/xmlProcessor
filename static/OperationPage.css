@@ -1,0 +1,527 @@
+/* Decoration of the online page */
+
+/*==========[setting]==========*/
+:root{
+    --backgroundColor: rgb(27, 30, 33);
+    --lineColor:rgb(111, 200, 220);
+
+    --textColor: rgb(111,200,220);  /*rgb(220,215,215);*/
+    --textFont: "Times New Roman", Times, serif;
+    --hoverTextColor: rgb(220,215,215);
+    --matchColor: rgb(170, 220, 240);
+
+    --shadowColor: rgb(255,255,255);
+
+
+    --transluDecorator : rgba(160, 100, 40, 0.5);
+    --transpaDecorator : rgba(0, 0, 0, 0);
+
+    --edgingHeight: 50px;
+}
+
+body {
+    background-color: var(--backgroundColor);
+}
+
+/*==========[scrollbar]==========*/
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--backgroundColor);
+    overflow: auto;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--lineColor);
+    overflow: auto;
+}
+
+::-webkit-scrollbar-corner {
+    background-color: var(--backgroundColor);
+}
+
+/*==========[xmlProcessor]==========*/
+div.frame{
+    border: 1.5px solid var(--lineColor);
+}
+
+/*fileArea*/
+div#fileArea{
+    float: left;
+}
+
+div#searchArea{
+    box-sizing: border-box;
+    height: 50px;
+}
+
+div#fileTreeArea{
+    box-sizing: border-box;
+    border-top: none;
+    border-bottom: none;
+    overflow: auto;
+}
+
+div#serverArea{
+    box-sizing: border-box;
+    height: 50px;
+}
+
+/*operationArea*/
+div#operationArea{
+    float: left;
+}
+
+div#fnArea{
+    box-sizing: border-box;
+    border-left: none;
+    height: 50px;
+}
+
+div#xPathArea{
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+div#operFnArea{
+    box-sizing: border-box;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+div#operArea{
+    float: left;
+}
+
+div#fileContentArea{
+    float: left;
+}
+
+div#fileContent{
+    box-sizing: border-box;
+    border-top: none;
+    border-bottom: none;
+}
+
+div#contentFnArea{
+    box-sizing: border-box;
+    height: 50px;
+}
+
+
+
+
+
+/*==========[fileArea]==========*/
+/*searchArea*/
+ul.fileAreaUl{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li#searchDown:hover div#filterMode{
+    display: block;
+    z-index: 5;
+}
+
+ul.fileAreaUl li{
+    float: left;
+}
+
+div#filterMode{
+    display: none;
+    position: absolute;
+    border: 1.5px solid var(--lineColor);
+    border-radius: 5px;
+}
+
+div#filterMode button{
+    text-decoration: none;
+    text-align: left;
+    outline: none;
+    display: block;
+    font-size: 12px;
+    color: var(--textColor);
+    background-color: var(--backgroundColor);
+    width: 100px;
+    Height: 50px;
+    border: none;
+}
+
+div#filterMode button:hover{
+    color: var(--hoverTextColor);
+}
+
+button#searchMode{
+    margin-left: 10px;
+    margin-top: 10px;
+    background: url('svg/search.svg');
+    border: none;
+    height: 25px;
+    width: 25px;
+}
+
+
+
+/* serverArea*/
+li#serverUp:hover div#serverHistory{
+    display: block;
+}
+
+div#serverHistory{
+    display: none;
+    position: absolute;
+    margin-top: -235px;
+    border: 1.5px solid var(--lineColor);
+    border-radius: 5px;
+    background-color: var(--backgroundColor);
+}
+
+div#serverHistory button{
+    text-decoration: none;
+    text-align: left;
+    outline: none;
+    display: block;
+    font-size: 12px;
+    color: var(--textColor);
+    background-color: var(--backgroundColor);
+    Height: 50px;
+    border: none;
+    min-width: 100px;
+}
+
+div#serverHistory button#clearWP{
+    color: var(--lineColor);
+    font-weight:bold;
+    font-style: italic;
+}
+
+div#serverHistory button#clearWP:hover{
+    color:red;
+}
+
+
+button#chooseHistory{
+    margin-left: 10px;
+    margin-top: 10px;
+    background: url('svg/server.svg');
+    border: 0px;
+    height: 25px;
+    width: 25px;
+}
+
+input.fileAreaInput{
+    outline: none;
+    background-color: var(--transpaDecorator);
+    font-family: var(--textFont);
+    color: var(--textColor);
+    font-size: 16px;
+    margin-top: 9px;
+    margin-left: 10px;
+    padding: 5px;
+    
+    border:none;
+}
+
+div#serverHistory button:hover{
+    color: var(--hoverTextColor);
+}
+
+
+
+
+
+/*==========[operationArea]==========*/
+/*----------[fnArea]---------- */
+ul#fnList{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li.dropdown{
+    float: left;
+}
+
+li.dropdown a.baseFn{
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    color: var(--textColor);
+    font-size: 18px;
+    padding-left: 20px;
+    padding-right: 10px;
+    margin-top: 15px;
+}
+
+li.dropdown a.baseFn:hover {
+    color: var(--hoverTextColor);
+}
+
+li.dropdown div.dropdownFn{
+    border: 1.5px solid var(--lineColor);
+    background-color: var(--backgroundColor);
+    border-radius: 5px;
+    z-index: 7;
+}
+
+li.dropdown button.fnBtn{
+    text-decoration: none;
+    text-align: left;
+    outline: none;
+    display: block;
+    font-size: 12px;
+    color: var(--textColor);
+    background-color: var(--backgroundColor);
+    width: 100px;
+    Height: 50px;
+    border: none;
+}
+
+
+li.dropdown button.fnBtn:hover{
+    color: var(--hoverTextColor);
+}
+
+div.dropdownFn{
+    display: none;
+    position: absolute;
+}
+
+li.dropdown:hover div.dropdownFn {
+    display: block;
+}
+
+
+/*----------[operAndContent]---------- */
+
+/* xPath */
+
+div#operationArea input{
+    outline: none;
+    background-color: var(--transpaDecorator);
+    font-family: var(--textFont);
+    color: var(--textColor);
+    font-size: 16px;
+    margin-top: 10px;
+    margin-left: 10px;
+    padding: 5px;
+    
+    border:none;
+}
+
+
+button#workingXP{
+    margin: 0px;
+    padding: 0px;
+    width: 100px;
+    height: 30px;
+    margin-top: 10px;
+    margin-right: 10px;
+
+    font-family: var(--textFont);
+    font-size: 20px;
+    font-style: italic;
+
+    color: var(--lineColor);
+
+
+    border: none;
+    background-color: var(--backgroundColor);
+
+    text-shadow: 0 0 1px var(--shadowColor),
+    0 0 2px var(--shadowColor),
+    0 0 3px var(--shadowColor);
+}
+
+div#xpDropDown{
+    width: 100px;
+}
+
+div#xpDropDown:hover div#xpHistory{
+    display:block;
+}
+
+div#xpHistory{
+    display: none;
+    border: 1.5px solid var(--lineColor);
+    background-color: var(--backgroundColor);
+    border-radius: 5px;
+    position: absolute;
+    z-index: 7;
+}
+
+div#xpHistory button{
+    text-decoration: none;
+    text-align: left;
+    outline: none;
+    display: block;
+    font-size: 12px;
+    color: var(--lineColor);
+    background-color: var(--backgroundColor);
+    width: 100px;
+    height:50px;
+    border: none;
+}
+
+div#xpHistory button:hover{
+    color: var(--hoverTextColor);
+}
+
+
+/* operFnDiv */
+
+div.operFnDiv{
+    box-sizing: border-box;
+    background-color: var(--backgroundColor);
+    display: none;
+    border-bottom: 1.5px solid var(--lineColor);
+    color: white;
+}
+
+div.operFnDiv p{
+    margin: 0px;
+    padding: 0px;
+    padding-left: 10px;
+    padding-top: 10px;
+    color: var(--lineColor);
+}
+
+div.operFnDiv button{
+    outline: none;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: 10px;
+
+    font-family: var(--textFont);
+    color: var(--lineColor);
+    background: var(--backgroundColor);
+    border: 1px solid var(--lineColor);
+
+    box-shadow: 0 3px #999;    
+}
+
+div.operFnDiv button:hover{
+    color: var(--matchColor);
+    border: 1.5px solid var(--matchColor);
+}
+
+div.operFnDiv button:active{
+    box-shadow: 0 5px #666;
+    transform: translateY(3px);
+}
+
+
+/* upload */
+p#uploadInfo{
+    position: absolute;
+}
+
+div#upload{
+    overflow:auto;
+}
+
+button#uploadBtn{
+    position: absolute;
+    margin-top: 90px;
+    height: 110px;
+    width: 130px;
+    background: url('svg/upload.svg');
+    box-shadow: 0 0px black;  
+}
+
+form#uploadForm input#myfiles{
+    position: absolute;
+    display: block;
+    border: 1px solid var(--lineColor);
+    margin-bottom: 10px;
+    height: 100px;
+    width: 120px;
+    opacity:0.0;
+    margin-top: 30px;
+}
+
+
+div#selectedFiles{
+    margin-top: 60px;
+    margin-left: 10px;
+    font-family: var(--textFont);
+    color: var(--lineColor);
+    padding-top: 150px;
+}
+
+
+form#uploadForm input#uploadSub{
+    position: absolute;
+    text-decoration:none;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: -20px;
+    padding: 5px;
+    font-family: var(--textFont);
+    color: var(--lineColor);
+    background: var(--backgroundColor);
+    border: 1px solid var(--lineColor);
+    box-shadow: 0 3px #999;    
+    width: 130px;
+}
+
+form#uploadForm input#uploadSub:hover{
+    color: var(--matchColor);
+    border: 1.5px solid var(--matchColor);
+}
+
+
+form#uploadForm input#uploadSub:active{
+    box-shadow: 0 5px #666;
+    transform: translateY(3px);
+}
+
+
+/*download*/
+
+a#downloadClick{
+    text-decoration:none;
+    position: absolute;
+    border-radius: 10px;
+    font-size: 16px;
+    margin-left: 10px;
+    margin-top: 15px;
+    padding: 5px;
+    font-family: var(--textFont);
+    color: var(--lineColor);
+    background: var(--backgroundColor);
+    border: 1px solid var(--lineColor);
+    box-shadow: 0 3px #999;    
+}
+
+a#downloadClick:hover{
+    color: var(--matchColor);
+    border: 1.5px solid var(--matchColor);
+}
+
+
+a#downloadClick:active{
+    box-shadow: 0 5px #666;
+    transform: translateY(3px);
+}
+
+/* save changed file */
+button#saveCurChange{
+    margin-left: 10px;
+    margin-top: 10px;
+    background: url('svg/save-file.svg');
+    border: none;
+    outline: none;
+    height: 25px;
+    width: 25px;
+}

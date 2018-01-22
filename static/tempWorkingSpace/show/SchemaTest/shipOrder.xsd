@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+	<!--简易元素-->
+	<xs:element name="orderPerson" type="xs:string"/>
+
+	<xs:element name="name" type="xs:string"/>
+	<xs:element name="address" type="xs:string"/>
+	<xs:element name="city" type="xs:string"/>
+	<xs:element name="country" type="xs:string"/>
+
+	<xs:element name="title" type="xs:string"/>
+	<xs:element name="note" type="xs:string"/>
+	<xs:element name="quantity" type="xs:integer"/>
+	<xs:element name="price">
+	    <xs:simpleType>
+		    <xs:restriction base="xs:decimal">
+			    <xs:totalDigits value="5"/>
+				<xs:fractionDigits value="2" fixed="true"/>
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>		
+
+	<!--属性-->
+	<xs:attribute name="orderID">
+		<xs:simpleType>
+			<xs:restriction base="xs:string">
+				<xs:length value="6"/>
+			</xs:restriction>
+		</xs:simpleType>
+	</xs:attribute>
+
+
+	<!--复合元素-->
+	<xs:element name="shipTo">
+		<xs:complexType mixed="true">
+			<xs:sequence>
+				<xs:element ref="name"/>
+				<xs:element ref="address"/>
+				<xs:element ref="city"/>
+				<xs:element ref="country"/>
+			</xs:sequence>
+			<xs:attribute name="shipDate" type="xs:string"/>
+		</xs:complexType>
+	</xs:element>
+
+	<xs:element name="item">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="title"/>
+				<xs:element ref="note" minOccurs="0"/>
+				<xs:element ref="quantity"/>
+				<xs:element ref="price"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+
+
+	<xs:element name="shipOrder">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="orderPerson"/>
+				<xs:element ref="shipTo"/>
+				<xs:element ref="item" maxOccurs="unbounded"/>
+			</xs:sequence>
+			<xs:attribute ref="orderID" use="required"/>
+		</xs:complexType>
+	</xs:element>
+
+</xs:schema>

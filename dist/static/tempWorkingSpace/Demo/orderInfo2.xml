@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<order>
+	<orderType>Virtual Trade</orderType>
+	<from>Company C</from>
+	<to>Company D</to>
+	<shipDate>2017-12-20</shipDate>
+	<orderDetail>
+		<item>
+			<name>map files</name>
+			<quantity>1000</quantity>
+			<unit>map</unit>
+			<singlePrice>0.1</singlePrice>
+			<totalPrice>100</totalPrice>
+		</item>
+		<item>
+			<name>battle unit files</name>
+			<quantity>22</quantity>
+			<unit>unit</unit>
+			<singlePrice>10</singlePrice>
+			<totalPrice>200</totalPrice>
+		</item>
+	</orderDetail>
+</order>

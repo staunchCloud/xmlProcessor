@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta content="test/html charset=utf-8">
+    <title>XML-Processor</title>
+    <!--Jquery引用，需要放在前位-->
+    <script src="jquery.js"></script>
+    <!--Logo图标引用-->
+    <link rel="shortcut icon" href="XmlProcessor.png" />
+    <!--ZBUS引用-->
+    <script type="text/javascript" src="zbus/zbus.js"></script>
+    <!--zTree引用-->
+    <link rel="stylesheet" href="ztree/zTreeStyle.css" type="text/css">
+    <script src="ztree/jquery.ztree.all.min.js" type="text/javascript"></script>
+    <script src="ztree/jquery.ztree.exhide.js" type="text/javascript"></script>
+    <!--CodeMirror引用-->
+    <script src="codemirror/codemirror.js"></script>
+    <link rel="stylesheet" href="codemirror/codemirror.css">
+    <link rel="stylesheet" href="codemirror/solarized.css">
+    <script type="text/javascript" src="codemirror/xml.js"></script>
+    <!--XmlProcessor, JS & CSS引用-->
+    <link rel="stylesheet" href="OperationPage.css" type="text/css">
+    <script src="OperationPage.js" type="text/javascript"></script>
+    <script src="OperationPageFO.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <div id="xmlProcessor">
+
+        <div id="fileArea">
+            <div id="searchArea" class="frame">
+                <ul class="fileAreaUl">
+                    <li id="searchDown">
+                        <button id="searchMode"></button>
+                        <div id="filterMode">
+                            <button onclick="normalType()">Normal</button>
+                            <button onclick="timeType()">Time</button>
+                        </div>
+                    </li>
+                    <li>
+                        <input id="filterInput" class="fileAreaInput" type="text" onkeyup="filterFiles()" placeholder="FileName.xml" onmouseover="this.title=this.value">
+                    </li>
+                </ul>
+            </div>
+
+            <div id="fileTreeArea" class="frame">
+                <ul id="fileTree" class="ztree"></ul>
+            </div>
+
+            <div id="serverArea" class="frame">
+                <ul class="fileAreaUl">
+                    <li id="serverUp">
+                        <button id="chooseHistory"></button>
+                        <div id="serverHistory">
+                            <button id="clearWP" onclick="clearStorage()">Clear History</button>
+                            <button id="WP3" onclick="btnSetWorkPath('WP3')"></button>
+                            <button id="WP2" onclick="btnSetWorkPath('WP2')"></button>
+                            <button id="WP1" onclick="btnSetWorkPath('WP1')"></button>
+                        </div>
+                    </li>
+                    <li>
+                        <input id="serverInput" class="fileAreaInput" type="text" placeholder="change path in server" 
+                        onmouseover="this.title=this.value">
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div id="operationArea">
+
+            <div id="fnArea" class="frame">
+                <ul id="fnList">
+
+                    <li class="dropdown">
+                        <a class="baseFn">File</a>
+                        <div class="dropdownFn">
+                            <button class="fnBtn" onclick="switchOperFnDiv('upload')">Upload</button>
+                            <button class="fnBtn" onclick="switchOperFnDiv('download')">Download</button>
+                        </div>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="baseFn">Add</a>
+                        <div class="dropdownFn">
+                            <button class="fnBtn" onclick="switchOperFnDiv('addEle')">Element</button>
+                            <button class="fnBtn" onclick="switchOperFnDiv('addAttr')">Attribute</button>
+                            <button class="fnBtn" onclick="switchOperFnDiv('addComm')">Comment</button>
+                            <button class="fnBtn" onclick="switchOperFnDiv('addIDs')">IDs</button>
+                        </div>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="baseFn">Check</a>
+                        <div class="dropdownFn">
+                            <button class="fnBtn" onclick="switchOperFnDiv('checkBySchema')">Schema</button>
+                        </div>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="baseFn">Delete</a>
+                        <div class="dropdownFn">
+                            <button class="fnBtn" onclick="switchOperFnDiv('deleteEle')">Element</button>
+                            <button class="fnBtn" onclick="switchOperFnDiv('deleteAttr')">Attribute</button>
+                            <button class="fnBtn" onclick="switchOperFnDiv('deleteComm')">Comment</button>
+                        </div>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="baseFn">Retrieve</a>
+                        <div class="dropdownFn">
+                            <button class="fnBtn" onclick="switchOperFnDiv('getEleNum')">ElementNum</button>
+                            <button class="fnBtn" onclick="switchOperFnDiv('getAttrNum')">AttributeNum</button>
+                        </div>
+                    </li>
+
+                    <li class="dropdown">
+                        <a class="baseFn">Update</a>
+                        <div class="dropdownFn">
+                            <button class="fnBtn" onclick="switchOperFnDiv('updateEle')">Element</button>
+                            <button class="fnBtn" onclick="switchOperFnDiv('updateAttr')">Attribute</button>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+            <div id="operAndContent">
+                <div id="operArea">
+                    <div id="xPathArea" class="frame">
+                        <div id="xpDropDown">
+                            <button id="workingXP">Set XPath</button>
+                            <div id="xpHistory">
+                                <button id="XP1" onclick="btnSetXPath('XP1')"></button>
+                                <button id="XP2" onclick="btnSetXPath('XP2')"></button>
+                                <button id="XP3" onclick="btnSetXPath('XP3')"></button>
+                                <button id="XP4" onclick="btnSetXPath('XP4')"></button>
+                                <button id="XP5" onclick="btnSetXPath('XP5')"></button>
+                            </div>
+                        </div>
+                        <input id="xpInput" class="operationAreaInput" type="text" placeholder="/root/element[1]" onmouseover="this.title=this.value">
+                    </div>
+
+                    <div id="operFnArea" class="frame">
+
+                        <!--File-->
+                        <div id="upload" class="operFnDiv">
+                            <p id="uploadInfo">Upload files:</p>
+                            <button id="uploadBtn"></button>
+                            <form id="uploadForm" class="233">
+                                <input id="uploadSub" type="submit" />
+                                <input id="myfiles" type="file" name="myfiles" multiple draggable="true" />
+
+                                <div id="selectedFiles"></div>
+                                <input type="hidden" name="uploader" value="user" />
+                                <input type="hidden" name="time" value="2017-12-01" />
+                            </form>
+                        </div>
+                        <div id="download" class="operFnDiv">
+                            <p>Download files:</p>
+                            <a id="downloadClick" href="/handler/download">Download</a>
+                        </div>
+
+                        <!--Add-->
+                        <div id="addEle" class="operFnDiv">
+                            <p>[Add Element Operation]</p>
+                            <p>Element name:</p>
+                            <input id="addEleName" class="operationAreaInput" type="text" placeholder="element name" onmouseover="this.title=this.value">
+                            <p>Element value:</p>
+                            <input id="addEleValue" class="operationAreaInput" type="text" placeholder="element value" onmouseover="this.title=this.value">
+                            <button onclick="addElement()">Confirm Operation</button>
+                        </div>
+                        <div id="addAttr" class="operFnDiv">
+                            <p>[Add Attribute Operation]</p>
+                            <p>Attribute name:</p>
+                            <input id="addAttrName" class="operationAreaInput" type="text" placeholder="attribute name" onmouseover="this.title=this.value">
+                            <p>Attribute value:</p>
+                            <input id="addAttrValue" class="operationAreaInput" type="text" placeholder="attribute value" onmouseover="this.title=this.value">
+                            <button onclick="addAttribute()">Confirm Operation</button>
+                        </div>
+                        <div id="addComm" class="operFnDiv">
+                            <p>[Add Comment Operation]</p>
+                            <p>Comment value:</p>
+                            <input id="addCommValue" class="operationAreaInput" type="text" placeholder="comment value" onmouseover="this.title=this.value">
+                            <button onclick="addComment()">Confirm Operation</button>
+                        </div>
+                        <div id="addIDs" class="operFnDiv">
+                            <p>[Add IDs]</p>
+                            <p>Initial ID value:</p>
+                            <input id="addID" class="operationAreaInput" type="text" placeholder="0" onmouseover="this.title=this.value">
+                            <button onclick="addIDs()">Confirm Operation</button>
+                        </div>
+
+                        <!--Check-->
+                        <div id="checkBySchema" class="operFnDiv">
+                            <p>[Check By Scheme Operation]</p>
+                            <p>Current Schema:</p>
+                            <input id="curSchema" class="operationAreaInput" type="text" placeholder="/static/schema.xsd" onmouseover="this.title=this.value">
+                            <p>Set current file as schema.</p>
+                            <button onclick="setSchema()">Set Schema</button>
+                            <p>Check selected files by Schema:</p>
+                            <button onclick="checkByXSD()">Confirm Operation</button>
+                        </div>
+
+                        <!--Delete-->
+                        <div id="deleteEle" class="operFnDiv">
+                            <p>[Delete Element Operation]</p>
+                            <button onclick="deleteElement()">Confirm Operation</button>
+                        </div>
+                        <div id="deleteAttr" class="operFnDiv">
+                            <p>[Delete Attribute Operation]</p>
+                            <button onclick="deleteAttribute()">Confirm Operation</button>
+                        </div>
+                        <div id="deleteComm" class="operFnDiv">
+                            <p>[Delete Comment Operation]</p>
+                            <button onclick="deleteComment()">Confirm Operation</button>
+                        </div>
+
+                        <!--Retrieve-->
+                        <div id="getEleNum" class="operFnDiv">
+                            <p>[Retrieve Element Number Operation]</p>
+                            <p>Element name:</p>
+                            <input id="retrieveEleNum" class="operationAreaInput" type="text" placeholder="element name" onmouseover="this.title=this.value">
+                            <button onclick=" retrieveElementNum()">Confirm Operation</button>
+                        </div>
+                        <div id="getAttrNum" class="operFnDiv">
+                            <p>[Retrieve Attribute Number Operation]</p>
+                            <p>Attribute name:</p>
+                            <input id="retrieveAttrNum" class="operationAreaInput" type="text" placeholder="attribute name" onmouseover="this.title=this.value">
+                            <button onclick=" retrieveAttributeNum()">Confirm Operation</button>
+                        </div>
+
+                        <!--Update-->
+                        <div id="updateEle" class="operFnDiv">
+                            <p>[Update Element Operation]</p>
+                            <p>Element value:</p>
+                            <input id="updateEleValue" class="operationAreaInput" type="text" placeholder="element value" onmouseover="this.title=this.value">
+                            <button onclick="updateElementValue()">Confirm Operation</button>
+                        </div>
+                        <div id="updateAttr" class="operFnDiv">
+                            <p>[Update Attribute Operation]</p>
+                            <p>Attribute value:</p>
+                            <input id="updateAttrValue" class="operationAreaInput" type="text" placeholder="attribute value" onmouseover="this.title=this.value">
+                            <button onclick="updateAttributeValue()">Confirm Operation</button>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div id="fileContentArea">
+                    <div id="fileContent" class="frame">
+                        <form>
+                            <textarea id="code" name="code"><!-- Welcome to use XML Processor!--></textarea>
+                        </form>
+                    </div>
+
+                    <div id="contentFnArea" class="frame">
+                        <button id="saveCurChange" onclick="saveChange()"></button>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+
+
+</html>

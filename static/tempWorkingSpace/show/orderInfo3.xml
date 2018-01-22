@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<order>
+	<orderType>邪恶交易</orderType>
+	<from>A公司</from>
+	<to>E公司</to>
+	<shipDate>2017-12-18</shipDate>
+
+	<orderDetail>
+		<item>
+			<name>纳米断船丝</name>
+			<quantity>1</quantity>
+			<unit>根</unit>
+			<singlePrice>7798000</singlePrice>
+			<totalPrice>7798000</totalPrice>
+		</item>
+
+		<item>
+			<name>水滴探测器</name>
+			<quantity>8</quantity>
+			<unit>台</unit>
+			<singlePrice>10000000000000000000</singlePrice>
+			<totalPrice>80000000000000000000</totalPrice>
+			<extendedInfo>
+				<weakness>四维空间里本探测器易受损</weakness>
+			</extendedInfo>
+		</item>
+
+		<item>
+			<name>青铜时代号</name>
+			<quantity>1</quantity>
+			<unit>艘</unit>
+			<singlePrice>117798000</singlePrice>
+			<totalPrice>117798000</totalPrice>
+		</item>
+	</orderDetail>
+</order>
